@@ -19,6 +19,7 @@ public class Main extends JavaPlugin {
         instance = this;
         Update update = new Update();
         saveDefaultConfig();
+        Settings.create();
         // BitCore
         getCommand("bitcore").setExecutor(new BitCoreCommand());
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
@@ -32,7 +33,6 @@ public class Main extends JavaPlugin {
             getLogger().warning("Nie mozna zaladowac AntyProxy!");
         }
 
-        Settings.create();
         getServer().getScheduler().scheduleSyncRepeatingTask(this, update::checkAll, 0/*60*20*/,3600 * 20L);
 
     }

@@ -36,7 +36,7 @@ public class antyproxy implements CommandExecutor {
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7zezwalaj &8<&eIP&8> - Zezwala na polaczenia z podanego IP"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7blokuj &8<&eIP&8> - Blokuje polaczenia z podanego IP"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7sprawdz &8<&eIP&8> - Sprawdzanie stanu blokady IP"));
-                        sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7reload - &8Przeladowuje dane z pamieci"));
+                        sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7reload &8- Przeladowuje dane z pamieci"));
                         sender.sendMessage(ChatFix.fixColor("&7&l----------------------"));
                     }
                 } else {
