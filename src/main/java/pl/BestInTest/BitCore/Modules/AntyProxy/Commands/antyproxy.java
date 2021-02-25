@@ -48,7 +48,7 @@ public class antyproxy implements CommandExecutor {
                             Cache.removeFromWyjatki(IP + ": false");
                             Cache.addToWyjatki(IP + ": true");
                             try {
-                                data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), true);
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), true);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do wyjatkow."));
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -63,7 +63,7 @@ public class antyproxy implements CommandExecutor {
                             Cache.removeFromWyjatki(IP + ": true");
                             Cache.addToWyjatki(IP + ": false");
                             try {
-                                data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), false);
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), false);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do adresow blokowanych."));
                             } catch (IOException e) {
                                 e.printStackTrace();

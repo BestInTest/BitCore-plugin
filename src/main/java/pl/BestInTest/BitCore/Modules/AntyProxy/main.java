@@ -12,19 +12,19 @@ import java.io.IOException;
 public class main {
     public static void start() throws FileNotFoundException {
         if (pl.BestInTest.BitCore.Utils.Settings.isAntyProxyEnabled()) {
-            if (!data.exists("plugins/BitCore/Modules/AntyProxy/Settings.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/lang.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/wyjatki.yml") || !data.exists("plugins/Bitcore/Modules/AntyProxy/cache/country.yml") || !data.exists("plugins/Bitcore/Modules/AntyProxy/cache/proxy.yml")) {
+            if (!data.exists("plugins/BitCore/Modules/AntyProxy/Settings.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/lang.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/wyjatki.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/cache/country.yml") || !data.exists("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml")) {
                 try {
                     System.out.println((ChatFix.fixColor("&9&l[AntyProxy] &7Tworze nowe pliki konfiguracyjne...")));
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/wyjatki.yml", "127-0-0-1", true);
-                    data.createFile("plugins/Bitcore/Modules/AntyProxy/cache/proxy.yml");
-                    data.createFile("plugins/Bitcore/Modules/AntyProxy/cache/country.yml");
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "Enabled", true);
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "cache-country-ips", true);
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "cache-proxy-ips", true);
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "Proxy-check", true);
-                    data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "Country-check", true);
-                    data.ymlSave("plugins/Bitcore/Modules/AntyProxy/Settings.yml", "api-provider", "ipapi"); // ipapi, ip-api, geoip-db
-                    data.ymlSave("plugins/Bitcore/Modules/AntyProxy/lang.yml", "Kontakt", "discord.com");
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", "127-0-0-1", true);
+                    data.createFile("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml");
+                    data.createFile("plugins/BitCore/Modules/AntyProxy/cache/country.yml");
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "Enabled", true);
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "cache-country-ips", true);
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "cache-proxy-ips", true);
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "Proxy-check", true);
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "Country-check", true);
+                    data.ymlSave("plugins/BitCore/Modules/AntyProxy/Settings.yml", "api-provider", "ipapi"); // ipapi, ip-api, geoip-db
+                    data.ymlSave("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt", "discord.com");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Main.getInstance().getLogger().warning("Nie mozna odczytac lub zapisac plikow konfiguracyjnych! Sprawdz czy uprawnienia dostepu do plikow zostaly poprawnie ustawione.");

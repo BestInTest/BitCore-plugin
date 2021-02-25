@@ -40,7 +40,7 @@ public class GUI {
         ItemBuilder zamknij = (new ItemBuilder(Material.BARRIER, 1)).setTitle(ChatFix.fixColor("&4Zamknij"));
         ItemBuilder odinstalujdodatki = (new ItemBuilder(Material.GLOWSTONE, 1)).setTitle(ChatFix.fixColor("&eOdinstaluj dodatki"));
 
-        if (Boolean.parseBoolean(data.ymlLoad("plugins/Bitcore/Modules/Settings.yml", "Moduly.2Step"))) {
+        if (Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/Settings.yml", "Moduly.2Step"))) {
             ItemBuilder step = (new ItemBuilder(Material.NAME_TAG, 1)).setTitle(ChatFix.fixColor("&c2Step &8(&a&lV&8)"))
                     .addLores(Arrays.asList(ChatFix.fixColor("&7Wersja: " + stepwersja)
                             , ""
@@ -72,7 +72,7 @@ public class GUI {
                             , ChatFix.fixColor("&8[&aKliknij aby wlaczyc&8]")));
             Inventory.setItem(12, step.build());
         }
-        if (!Boolean.parseBoolean(data.ymlLoad("plugins/Bitcore/Modules/Settings.yml", "Moduly.AntyProxy"))) {
+        if (!Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/Settings.yml", "Moduly.AntyProxy"))) {
             ItemBuilder antyproxy = (new ItemBuilder(Material.FLINT_AND_STEEL, 1)).setTitle(ChatFix.fixColor("&6AntyProxy &8(&c&lX&8)"))
                     .addLores(Arrays.asList(ChatFix.fixColor("&7Wersja: " + antyproxywersja)
                             , ""
@@ -103,7 +103,7 @@ public class GUI {
                 Inventory.setItem(13, antyproxy.build());
         }
 
-        if (!Boolean.parseBoolean(data.ymlLoad("plugins/Bitcore/Modules/Settings.yml", "Moduly.Pinger"))) {
+        if (!Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/Settings.yml", "Moduly.Pinger"))) {
             ItemBuilder pinger = (new ItemBuilder(Material.COMPASS, 1)).setTitle(ChatFix.fixColor("&bPinger &8(&c&lX&8)"))
                     .addLores(Arrays.asList(ChatFix.fixColor("&7Wersja: " + pingerwersja)
                             , ""

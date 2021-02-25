@@ -51,13 +51,13 @@ public class Connect implements Listener {
                 if (Web.get("https://blackbox.ipinfo.app/lookup/%player's ip%").equalsIgnoreCase("Y")) {
                     e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                     if (cacheProxy) {
-                        data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/cache/proxy.yml", IP, false);
+                        data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, false);
                         Cache.addToProxyCache(IP + ": false");
                     }
                     return;
                 } else {
                     if (cacheProxy) {
-                        data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/cache/proxy.yml", IP, true);
+                        data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, true);
                         Cache.addToProxyCache(IP + ": true");
                     }
                 }
@@ -67,7 +67,7 @@ public class Connect implements Listener {
                 if (API.equalsIgnoreCase("ipapi")) {
                     if (Web.get("https://ipapi.co/" + clearIP + "/country/").equalsIgnoreCase("PL")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
                             Cache.addToCountryCache(IP + ": true");
                         }
                     } else {
@@ -78,7 +78,7 @@ public class Connect implements Listener {
                 if (API.equalsIgnoreCase("ip-api")) {
                     if (Web.get("http://ip-api.com/json/" + clearIP + "?fields=country").equalsIgnoreCase("{\"country\":\"Poland\"}")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
                             Cache.addToCountryCache(IP + ": true");
                         }
                     } else {
@@ -89,7 +89,7 @@ public class Connect implements Listener {
                 if (API.equalsIgnoreCase("geoip-db")) {
                     if (Web.get("http://geolocation-db.com/jsonp/" + clearIP).contains("Poland")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/Bitcore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
                             Cache.addToCountryCache(IP + ": true");
                         }
                     } else {
