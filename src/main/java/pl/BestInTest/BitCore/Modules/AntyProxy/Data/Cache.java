@@ -11,7 +11,7 @@ public class Cache {
     static ArrayList<String> CountryCache = new ArrayList<>();
     static ArrayList<String> Wyjatki = new ArrayList<>();
     public static void LoadProxyCache() throws FileNotFoundException {
-        Scanner s = new Scanner(new File("plugins/Bitcore/Modules/AntyProxy/cache/proxy.yml")).useDelimiter(System.lineSeparator());
+        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml")).useDelimiter(System.lineSeparator());
         if (!ProxyCache.isEmpty()) {
             ProxyCache.clear();
         }
@@ -32,7 +32,7 @@ public class Cache {
         ProxyCache.add(s);
     }
     public static void LoadCountryCache() throws FileNotFoundException {
-        Scanner s = new Scanner(new File("plugins/Bitcore/Modules/AntyProxy/cache/country.yml")).useDelimiter(System.lineSeparator());
+        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/cache/country.yml")).useDelimiter(System.lineSeparator());
         if (!CountryCache.isEmpty()) {
             CountryCache.clear();
         }
@@ -53,7 +53,7 @@ public class Cache {
         CountryCache.add(s);
     }
     public static void LoadWyjatki() throws FileNotFoundException {
-        Scanner s = new Scanner(new File("plugins/Bitcore/Modules/AntyProxy/wyjatki.yml")).useDelimiter(System.lineSeparator());
+        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/wyjatki.yml")).useDelimiter(System.lineSeparator());
         if (!Wyjatki.isEmpty()) {
             Wyjatki.clear();
         }

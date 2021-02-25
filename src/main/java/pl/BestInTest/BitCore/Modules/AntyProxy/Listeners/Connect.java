@@ -76,6 +76,7 @@ public class Connect implements Listener {
                     return;
                 }
                 if (API.equalsIgnoreCase("ip-api")) {
+                    System.out.println("ip-api");
                     if (Web.get("http://ip-api.com/json/" + clearIP + "?fields=country").equalsIgnoreCase("{\"country\":\"Poland\"}")) {
                         if (cacheCountry) {
                             data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
@@ -84,6 +85,7 @@ public class Connect implements Listener {
                     } else {
                         e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                     }
+                    System.out.println("ret");
                     return;
                 }
                 if (API.equalsIgnoreCase("geoip-db")) {
@@ -96,6 +98,7 @@ public class Connect implements Listener {
                         e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                     }
                 }
+                System.out.println("end");
             }
         }
     }
