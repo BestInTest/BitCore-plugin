@@ -1,0 +1,12 @@
+name: BitCore
+author: BestInTest
+version: 1.0
+main: pl.BestInTest.BitCore.Main
+description: Plugin zabezpieczajacy serwer
+commands:
+  bitcore:
+    description: Menu opcji pluginu.
+    aliases: bit
+    permission: bitcore.admin
+    permission-message: Brak uprawnien!
+  antyproxy:
