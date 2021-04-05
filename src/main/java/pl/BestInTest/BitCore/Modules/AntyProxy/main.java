@@ -24,7 +24,7 @@ public class main {
                     data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "Proxy-check", true);
                     data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/Settings.yml", "Country-check", true);
                     data.ymlSave("plugins/BitCore/Modules/AntyProxy/Settings.yml", "api-provider", "ipapi"); // ipapi, ip-api, geoip-db
-                    data.ymlSave("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt", "discord.com");
+                    data.ymlSave("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt", "&a<NL>discord.com");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Main.getInstance().getLogger().warning("Nie mozna odczytac lub zapisac plikow konfiguracyjnych! Sprawdz czy uprawnienia dostepu do plikow zostaly poprawnie ustawione.");
@@ -44,16 +44,19 @@ public class main {
             if (Settings.getcacheCountry()) {
                 p++;
                 System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie cache (" + p + "/" + n + ")"));
-                Cache.LoadCountryCache();
+                //Cache.LoadCountryCache();
+                Cache.LoadCountryNew();
             }
             if (Settings.getcacheProxy()) {
                 p++;
                 System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie cache (" + p + "/" + n + ")"));
-                Cache.LoadProxyCache();
+                //Cache.LoadProxyCache();
+                Cache.LoadProxyNew();
             }
             p++;
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie wyjatkow (" + p + "/" + n + ")"));
-            Cache.LoadWyjatki();
+            //Cache.LoadWyjatki();
+            Cache.LoadWyjatkiNew();
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Zakonczono ladowanie cache (" + (System.currentTimeMillis() - timerStart) + " ms)"));
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &aWlaczono modul AntyProxy"));
         }

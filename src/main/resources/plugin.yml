@@ -7,6 +7,4 @@ commands:
   bitcore:
     description: Menu opcji pluginu.
     aliases: bit
-    permission: bitcore.admin
-    permission-message: Brak uprawnien!
   antyproxy:

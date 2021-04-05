@@ -24,7 +24,7 @@ public class antyproxy implements CommandExecutor {
                                 main.start();
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &7Wystapil blad podczas przeladowania!"));
+                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &7Wystapil blad podczas przeladowania! Sprawdz konsole."));
                             }
                             sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &aPrzeladowano"));
                         } else {
@@ -45,8 +45,9 @@ public class antyproxy implements CommandExecutor {
                     boolean isValidIP = InetAddresses.isInetAddress(args[1]);
                     if (args[0].equalsIgnoreCase("zezwalaj")) {
                         if (isValidIP) {
-                            Cache.removeFromWyjatki(IP + ": false");
-                            Cache.addToWyjatki(IP + ": true");
+                            //Cache.removeFromWyjatki(IP + ": false");
+                            //Cache.addToWyjatki(IP + ": true");
+                            Cache.addToWyjatkiNew(IP,"true");
                             try {
                                 data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), true);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do wyjatkow."));
@@ -60,8 +61,9 @@ public class antyproxy implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("blokuj")) {
                         if (isValidIP) {
-                            Cache.removeFromWyjatki(IP + ": true");
-                            Cache.addToWyjatki(IP + ": false");
+                            //Cache.removeFromWyjatki(IP + ": true");
+                            //Cache.addToWyjatki(IP + ": false");
+                            Cache.addToWyjatkiNew(IP,"false");
                             try {
                                 data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), false);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do adresow blokowanych."));
@@ -75,13 +77,22 @@ public class antyproxy implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("sprawdz")) {
                         if (isValidIP) {
-                            boolean isAllowed = Cache.getFromWyjatki(IP + ": true");
+                            /*boolean isAllowed = Cache.getFromWyjatki(IP + ": true");
                             boolean isBlocked = Cache.getFromWyjatki(IP + ": false");
                             if (isAllowed) {
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &azezwolono"));
                                 return true;
                             }
                             if (isBlocked) {
+                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &4zablokowano"));
+                                return true;
+                            }*/
+                            String ipInfo = String.valueOf(Cache.getFromWyjatkiNew(IP));
+                            if (ipInfo.equalsIgnoreCase("true")) {
+                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &azezwolono"));
+                                return true;
+                            }
+                            if (ipInfo.equalsIgnoreCase("false")) {
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &4zablokowano"));
                                 return true;
                             }

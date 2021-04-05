@@ -3,6 +3,7 @@ package pl.BestInTest.BitCore.Modules.AntyProxy.Data;
 import pl.BestInTest.BitCore.Managers.data;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Settings {
 
@@ -20,7 +21,7 @@ public class Settings {
         cacheCountry = Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/AntyProxy/Settings.yml", "cache-country-ips"));
         cacheProxy = Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/AntyProxy/Settings.yml", "cache-proxy-ips"));
         Provider = data.ymlLoad("plugins/BitCore/Modules/AntyProxy/Settings.yml", "api-provider");
-        Kontakt = data.ymlLoad("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt");
+        Kontakt = Objects.requireNonNull(data.ymlLoad("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt")).replaceAll("<NL>", "\n");
         enable = pl.BestInTest.BitCore.Utils.Settings.isAntyProxyEnabled();
     }
     public static boolean getProxyCheck() {
