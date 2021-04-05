@@ -126,7 +126,7 @@ public class ItemBuilder {
         for (String lore : this.lore)
             newBuilder.addLore(lore);
         for (Map.Entry<Enchantment, Integer> entry : this.enchants.entrySet())
-            newBuilder.addEnchantment(entry.getKey(), ((Integer)entry.getValue()).intValue());
+            newBuilder.addEnchantment(entry.getKey(), entry.getValue());
         newBuilder.setColor(this.color);
         newBuilder.potion = this.potion;
         return newBuilder;
@@ -153,7 +153,7 @@ public class ItemBuilder {
     }
 
     public int getEnchantmentLevel(Enchantment enchant) {
-        return ((Integer)this.enchants.get(enchant)).intValue();
+        return this.enchants.get(enchant);
     }
 
     public HashMap<Enchantment, Integer> getAllEnchantments() {

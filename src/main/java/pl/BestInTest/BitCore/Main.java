@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
             getLogger().warning("Nie mozna zaladowac AntyProxy!");
         }
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, update::checkAll, 0/*60*20*/,3600 * 20L);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, update::checkAll, 20,3600 * 20L);
 
     }
     public static Main getInstance() {

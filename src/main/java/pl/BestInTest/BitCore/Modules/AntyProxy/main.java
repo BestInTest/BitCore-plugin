@@ -44,18 +44,15 @@ public class main {
             if (Settings.getcacheCountry()) {
                 p++;
                 System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie cache (" + p + "/" + n + ")"));
-                //Cache.LoadCountryCache();
                 Cache.LoadCountryNew();
             }
             if (Settings.getcacheProxy()) {
                 p++;
                 System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie cache (" + p + "/" + n + ")"));
-                //Cache.LoadProxyCache();
                 Cache.LoadProxyNew();
             }
             p++;
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie wyjatkow (" + p + "/" + n + ")"));
-            //Cache.LoadWyjatki();
             Cache.LoadWyjatkiNew();
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Zakonczono ladowanie cache (" + (System.currentTimeMillis() - timerStart) + " ms)"));
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &aWlaczono modul AntyProxy"));
