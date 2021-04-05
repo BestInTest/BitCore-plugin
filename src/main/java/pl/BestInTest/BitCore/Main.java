@@ -6,7 +6,6 @@ import pl.BestInTest.BitCore.Listeners.GuiListener;
 import pl.BestInTest.BitCore.Managers.Update;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Commands.antyproxy;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Listeners.Connect;
-import pl.BestInTest.BitCore.Modules.AntyProxy.Listeners.ConnectNew;
 import pl.BestInTest.BitCore.Modules.AntyProxy.main;
 import pl.BestInTest.BitCore.Utils.Settings;
 
@@ -26,7 +25,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
         // AntyProxy
         getCommand("antyproxy").setExecutor(new antyproxy());
-        getServer().getPluginManager().registerEvents(new ConnectNew(), this);
+        getServer().getPluginManager().registerEvents(new Connect(), this);
         try {
             main.start();
         } catch (FileNotFoundException e) {

@@ -26,67 +26,84 @@ public class Connect implements Listener {
             String kontakt = Settings.getKontakt();
 
             String IP = e.getAddress().getHostAddress().replaceAll("\\.", "-");
-            boolean isBlocked = Cache.getFromWyjatki(IP + ": false");
-            boolean isAllowed = Cache.getFromWyjatki(IP + ": true");
-            boolean CountryCache_isAllowed = Cache.getFromCountryCache(IP + ": false");
-            boolean CountryCache_isBlocked = Cache.getFromCountryCache(IP + ": true");
-            boolean ProxyCache_isAllowed = Cache.getFromProxyCache(IP + ": false");
-            boolean ProxyCache_isBlocked = Cache.getFromProxyCache(IP + ": true");
-            //System.out.println(isBlocked);
-            //System.out.println(isAllowed);
-            System.out.println(CountryCache_isAllowed);
-            //System.out.println(CountryCache_isBlocked);
-            System.out.println(ProxyCache_isAllowed);
-            //System.out.println(ProxyCache_isBlocked);
+            String Wyjatek = String.valueOf(Cache.getFromWyjatkiNew(IP));
+            String Country = String.valueOf(Cache.getFromCountryNew(IP));
+            String Proxy = String.valueOf(Cache.getFromProxyNew(IP));
 
-            if (isBlocked) {
+            if (Wyjatek.equalsIgnoreCase("false")) {
                 e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu zablokowania Twojego IP w module."));
                 return;
             }
-            if (isAllowed) {
+            if (Wyjatek.equalsIgnoreCase("true")) {
                 return;
             }
-            if (ProxyCache_isBlocked) {
-                e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
-                return;
+            if (cacheCountry) {
+                if (Country.equalsIgnoreCase("true")) {
+                    if (cacheProxy) {
+                        if (Proxy.equalsIgnoreCase("true")) {
+                            return;
+                        }
+                        if (Proxy.equalsIgnoreCase("false")) {
+                            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
+                } else {
+                    if (Country.equalsIgnoreCase("false")) {
+                        e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
+                        return;
+                    }
+                }
             }
-            if (CountryCache_isBlocked) {
-                e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
-                return;
+            if (cacheProxy) {
+                if (Proxy.equalsIgnoreCase("true")) {
+                    if (cacheCountry) {
+                        if (Country.equalsIgnoreCase("true")) {
+                            return;
+                        }
+                        if (Country.equalsIgnoreCase("false")) {
+                            e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
+                            return;
+                        }
+                    }
+                } else {
+                    if (Proxy.equalsIgnoreCase("false")) {
+                        e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
+                        return;
+                    }
+                }
             }
+
             String clearIP = e.getAddress().getHostAddress();
             if (ProxyCheck) {
-                if (!ProxyCache_isAllowed) {
-                    if (Web.get("https://blackbox.ipinfo.app/lookup/" + clearIP).equalsIgnoreCase("Y")) {
-                        e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
-                        if (cacheProxy) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, true);
-                            Cache.addToProxyCache(IP + ": true");
-                        }
-                        return;
-                    } else {
-                        if (cacheProxy) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, false);
-                            Cache.addToProxyCache(IP + ": false");
-                        }
+                if (Web.get("https://blackbox.ipinfo.app/lookup/" + clearIP).equalsIgnoreCase("Y")) {
+                    e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
+                    if (cacheProxy) {
+                        data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, false);
+                        Cache.addToProxyNew(IP,"false");
+                    }
+                    return;
+                } else {
+                    if (cacheProxy) {
+                        data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, true);
+                        Cache.addToProxyNew(IP,"true");
                     }
                 }
             }
             if (CountryCheck) {
-                if (cacheCountry && CountryCache_isAllowed) {
-                    return;
-                }
                 if (API.equalsIgnoreCase("ipapi")) {
                     if (Web.get("https://ipapi.co/" + clearIP + "/country/").equalsIgnoreCase("PL")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
-                            Cache.addToCountryCache(IP + ": false");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            Cache.addToCountryNew(IP,"true");
                         }
                     } else {
                         e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
-                            Cache.addToCountryCache(IP + ": true");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
+                            Cache.addToCountryNew(IP,"false");
                         }
                     }
                     return;
@@ -94,14 +111,14 @@ public class Connect implements Listener {
                 if (API.equalsIgnoreCase("ip-api")) {
                     if (Web.get("http://ip-api.com/json/" + clearIP + "?fields=country").equalsIgnoreCase("{\"country\":\"Poland\"}")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
-                            Cache.addToCountryCache(IP + ": false");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            Cache.addToCountryNew(IP,"true");
                         }
                     } else {
                         e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
-                            Cache.addToCountryCache(IP + ": true");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
+                            Cache.addToCountryNew(IP,"false");
                         }
                     }
                     return;
@@ -109,14 +126,14 @@ public class Connect implements Listener {
                 if (API.equalsIgnoreCase("geoip-db")) {
                     if (Web.get("http://geolocation-db.com/jsonp/" + clearIP).contains("Poland")) {
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
-                            Cache.addToCountryCache(IP + ": false");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
+                            Cache.addToCountryNew(IP,"true");
                         }
                     } else {
                         e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu wykrycia polaczenia niepochodzacego z Polski.\nJezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                         if (cacheCountry) {
-                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, true);
-                            Cache.addToCountryCache(IP + ": true");
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/country.yml", IP, false);
+                            Cache.addToCountryNew(IP,"false");
                         }
                     }
                 }
