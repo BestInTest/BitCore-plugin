@@ -78,7 +78,8 @@ public class Connect implements Listener {
 
             String clearIP = e.getAddress().getHostAddress();
             if (ProxyCheck) {
-                if (Web.get("https://blackbox.ipinfo.app/lookup/" + clearIP).equalsIgnoreCase("Y")) {
+                String result = Web.get("https://blackbox.ipinfo.app/lookup/" + clearIP);
+                if (result.equalsIgnoreCase("Y")) {
                     e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Twoj adres IP zostal uznany za proxy. Jezli uwazasz, ze to blad zglos to do nas: " + kontakt));
                     if (cacheProxy) {
                         data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, false);
@@ -86,9 +87,11 @@ public class Connect implements Listener {
                     }
                     return;
                 } else {
-                    if (cacheProxy) {
-                        data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, true);
-                        Cache.addToProxyNew(IP,"true");
+                    if (result.equalsIgnoreCase("N")) {
+                        if (cacheProxy) {
+                            data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/cache/proxy.yml", IP, true);
+                            Cache.addToProxyNew(IP, "true");
+                        }
                     }
                 }
             }
