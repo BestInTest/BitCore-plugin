@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import pl.BestInTest.BitCore.Managers.data;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Data.Cache;
-import pl.BestInTest.BitCore.Modules.AntyProxy.main;
+import pl.BestInTest.BitCore.Modules.AntyProxy.AntyProxy;
 import pl.BestInTest.BitCore.Utils.ChatFix;
 import pl.BestInTest.BitCore.Utils.Settings;
 
@@ -21,7 +21,7 @@ public class antyproxy implements CommandExecutor {
                     if (args.length == 1) {
                         if (args[0].equalsIgnoreCase("reload")) {
                             try {
-                                main.start();
+                                AntyProxy.start();
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &7Wystapil blad podczas przeladowania! Sprawdz konsole."));

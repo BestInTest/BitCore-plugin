@@ -30,7 +30,7 @@ public class antyproxy {
         }
         if (Settings.getcacheCountry()) {
             ItemBuilder saveCountry = (new ItemBuilder(Material.CHEST, 1)).setTitle(ChatFix.fixColor("&bZapisywanie sprawdzonych adresow")).addLores(Arrays.asList(ChatFix.fixColor("&7Przyspiesza proces sprawdzania IP"), ChatFix.fixColor("&7(moze zwiekszyc zuzycie pamieci)"), " ", ChatFix.fixColor("&8[&aWlaczone&8]"))).addEnchantment(Enchantment.DURABILITY,1);
-            Inventory.setItem(2,saveCountry.build());
+            Inventory.setItem(2, saveCountry.build());
         } else {
             ItemBuilder saveCountry = (new ItemBuilder(Material.CHEST, 1)).setTitle(ChatFix.fixColor("&bZapisywanie sprawdzonych adresow")).addLores(Arrays.asList(ChatFix.fixColor("&7Przyspiesza proces sprawdzania IP"), ChatFix.fixColor("&7(moze zwiekszyc zuzycie pamieci)"), " ", ChatFix.fixColor("&8[&cWylaczone&8]")));
             Inventory.setItem(2, saveCountry.build());

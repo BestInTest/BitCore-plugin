@@ -6,7 +6,11 @@ import pl.BestInTest.BitCore.Listeners.GuiListener;
 import pl.BestInTest.BitCore.Managers.Update;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Commands.antyproxy;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Listeners.Connect;
-import pl.BestInTest.BitCore.Modules.AntyProxy.main;
+import pl.BestInTest.BitCore.Modules.AntyProxy.AntyProxy;
+import pl.BestInTest.BitCore.Modules.Step.Commands.Login;
+import pl.BestInTest.BitCore.Modules.Step.Commands.StepCmd;
+import pl.BestInTest.BitCore.Modules.Step.Listeners.*;
+import pl.BestInTest.BitCore.Modules.Step.Step;
 import pl.BestInTest.BitCore.Utils.Settings;
 
 import java.io.FileNotFoundException;
@@ -18,22 +22,31 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
         Update update = new Update();
+        // BitCore
         saveDefaultConfig();
         Settings.create();
-        // BitCore
         getCommand("bitcore").setExecutor(new BitCoreCommand());
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
         // AntyProxy
         getCommand("antyproxy").setExecutor(new antyproxy());
         getServer().getPluginManager().registerEvents(new Connect(), this);
         try {
-            main.start();
+            AntyProxy.start();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             getLogger().warning("Nie mozna zaladowac AntyProxy!");
         }
+        // 2Step
+        getCommand("2step").setExecutor(new StepCmd());
+        getCommand("2login").setExecutor(new Login());
+        getServer().getPluginManager().registerEvents(new JoinAndQuitListener(), this);
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlace(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new CommandListener(), this);
+        Step.start();
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, update::checkAll, 20,3600 * 20L);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, update::check, 20,3600 * 20L);
 
     }
     public static Main getInstance() {

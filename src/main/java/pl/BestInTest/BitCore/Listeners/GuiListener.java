@@ -7,7 +7,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import pl.BestInTest.BitCore.GUIs.GUI;
 import pl.BestInTest.BitCore.GUIs.antyproxy;
-import pl.BestInTest.BitCore.Modules.AntyProxy.main;
+import pl.BestInTest.BitCore.GUIs.step;
+import pl.BestInTest.BitCore.Modules.AntyProxy.AntyProxy;
+import pl.BestInTest.BitCore.Modules.Step.Managers.Checks;
+import pl.BestInTest.BitCore.Modules.Step.Step;
 import pl.BestInTest.BitCore.Utils.ChatFix;
 import pl.BestInTest.BitCore.Utils.Settings;
 
@@ -28,22 +31,22 @@ public class GuiListener implements Listener {
                     if (ChatFix.fixColor("&c2Step &8(&c&lX&8)").equalsIgnoreCase(event.getCurrentItem().getItemMeta().getDisplayName())) {
 
                         player.closeInventory();
-                        //to do
-                        GUI.bitcore(player);
+                        Settings.set2StepEnabled(true);
+                        Step.start();
+                        step.StepGUI(player);
                         return;
                     }
                     if (ChatFix.fixColor("&c2Step &8(&a&lV&8)").equalsIgnoreCase(event.getCurrentItem().getItemMeta().getDisplayName())) {
 
                         player.closeInventory();
-                        //to do
-                        GUI.bitcore(player);
+                        step.StepGUI(player);
                         return;
                     }
                     if (ChatFix.fixColor("&6AntyProxy &8(&c&lX&8)").equalsIgnoreCase(event.getCurrentItem().getItemMeta().getDisplayName())) {
 
                         player.closeInventory();
                         Settings.setAntyProxyEnabled(true);
-                        main.start();
+                        AntyProxy.start();
                         antyproxy.AntyProxyGUI(player);
                         return;
                     }
@@ -139,8 +142,49 @@ public class GuiListener implements Listener {
                             pl.BestInTest.BitCore.Modules.AntyProxy.Data.Settings.setProxyCheck(true);
                         }
                         antyproxy.AntyProxyGUI(player);
+                        return;
                     }
 
+                }
+            }
+            if (ChatFix.fixColor("&a&lBC &7&l&m&o|&e&l zarzadzanie &7&l&m&o|&9 2Step").equalsIgnoreCase(event.getView().getTitle())) {
+                event.setCancelled(true);
+                Player player = (Player) event.getWhoClicked();
+                if (event.getCurrentItem() != null) {
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&cCofnij"))) {
+                        player.closeInventory();
+                        GUI.bitcore(player);
+                        return;
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&7Wylacz modul"))) {
+                        player.closeInventory();
+                        Settings.set2StepEnabled(false);
+                        GUI.bitcore(player);
+                        return;
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&aSprawdzanie chatu"))) {
+                        player.closeInventory();
+                        Checks.setChat(!Checks.getChat());
+                        step.StepGUI(player);
+                        return;
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&aSprawdzanie stawiania blokow"))) {
+                        player.closeInventory();
+                        Checks.setBlockPlace(!Checks.getBlockPlace());
+                        step.StepGUI(player);
+                        return;
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&aSprawdzanie niszczenia blokow"))) {
+                        player.closeInventory();
+                        Checks.setBlockBreak(!Checks.getBlockBreak());
+                        step.StepGUI(player);
+                        return;
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatFix.fixColor("&aSprawdzanie komend"))) {
+                        player.closeInventory();
+                        Checks.setUseCommands(!Checks.getUseCommands());
+                        step.StepGUI(player);
+                    }
                 }
             }
         }
