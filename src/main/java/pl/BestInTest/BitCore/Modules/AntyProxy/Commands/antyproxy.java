@@ -34,8 +34,11 @@ public class antyproxy implements CommandExecutor {
                         sender.sendMessage(ChatFix.fixColor("&7&l----------------------"));
                         sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cUzycie:"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7zezwalaj &8<&eIP&8> - Zezwala na polaczenia z podanego IP"));
+                        sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7zezwalaj &8<&enick&8> - Zezwala na polaczenia dla danego gracza"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7blokuj &8<&eIP&8> - Blokuje polaczenia z podanego IP"));
+                        sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7blokuj &8<&enick&8> - Blokuje polaczenia dla danego gracza"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7sprawdz &8<&eIP&8> - Sprawdzanie stanu blokady IP"));
+                        sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7sprawdz &8<&enick&8> - Sprawdzanie stanu blokady danego gracza"));
                         sender.sendMessage(ChatFix.fixColor("&8/antyproxy &7reload &8- Przeladowuje dane z pamieci"));
                         sender.sendMessage(ChatFix.fixColor("&7&l----------------------"));
                     }
@@ -45,35 +48,58 @@ public class antyproxy implements CommandExecutor {
                     boolean isValidIP = InetAddresses.isInetAddress(args[1]);
                     if (args[0].equalsIgnoreCase("zezwalaj")) {
                         if (isValidIP) {
-                            Cache.addToWyjatkiNew(IP,"true");
+                            Cache.addToWyjatkiIPNew(IP,"true");
                             try {
-                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), true);
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/IP.yml", args[1].replaceAll("\\.", "-"), true);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do wyjatkow."));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Adres " + clearIP + "&c nie moze zostac sprawdzony (prawdopodobnie jest bledny)"));
+                            //sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Adres " + clearIP + "&c nie moze zostac sprawdzony (prawdopodobnie jest bledny)"));
+                            Cache.addToWyjatkiGraczeNew(IP,"true");
+                            try {
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/players.yml", args[1], true);
+                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano gracza " + args[1] + "&c do wyjatkow."));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         return true;
                     }
                     if (args[0].equalsIgnoreCase("blokuj")) {
                         if (isValidIP) {
-                            Cache.addToWyjatkiNew(IP,"false");
+                            Cache.addToWyjatkiIPNew(IP,"false");
                             try {
-                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", args[1].replaceAll("\\.", "-"), false);
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/IP.yml", args[1].replaceAll("\\.", "-"), false);
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano adres IP " + clearIP + "&c do adresow blokowanych."));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Adres " + clearIP + "&c nie moze zostac sprawdzony (prawdopodobnie jest bledny)"));
+                            //sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Adres " + clearIP + "&c nie moze zostac sprawdzony (prawdopodobnie jest bledny)"));
+                            Cache.addToWyjatkiGraczeNew(IP,"false");
+                            try {
+                                data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/players.yml", args[1], false);
+                                sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cDodano gracza " + args[1] + "&c do blokowanych."));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         return true;
                     }
                     if (args[0].equalsIgnoreCase("sprawdz")) {
+                        String playerInfo = String.valueOf(Cache.getFromWyjatkiGraczeNew(args[1]));
+                        if (playerInfo.equalsIgnoreCase("true")) {
+                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla gracza " + args[1] + ": &azezwolono"));
+                            return true;
+                        }
+                        if (playerInfo.equalsIgnoreCase("false")) {
+                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla gracza " + args[1] + ": &4zablokowano"));
+                            return true;
+                        }
                         if (isValidIP) {
-                            String ipInfo = String.valueOf(Cache.getFromWyjatkiNew(IP));
+                            String ipInfo = String.valueOf(Cache.getFromWyjatkiIPNew(IP));
                             if (ipInfo.equalsIgnoreCase("true")) {
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &azezwolono"));
                                 return true;
@@ -82,11 +108,9 @@ public class antyproxy implements CommandExecutor {
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &4zablokowano"));
                                 return true;
                             }
-                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &abrak danych"));
-                        } else {
-                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Adres " + clearIP + "&c nie moze zostac sprawdzony (prawdopodobnie jest bledny)"));
+                            sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla zapytania " + clearIP + ": &abrak danych"));
                         }
-                        return true;
+                        sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cBlad! Nie znaleziono danych dla zapytania " + args[1] + "&c (sprawdz czy nie ma bledu)"));
                     } else {
                         sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cNa pewno poprawnie wpisales komende? Sprawdz /antyproxy"));
                     }

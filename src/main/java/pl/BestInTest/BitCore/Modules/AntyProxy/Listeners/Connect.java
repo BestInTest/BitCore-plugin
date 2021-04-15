@@ -26,10 +26,18 @@ public class Connect implements Listener {
             String kontakt = Settings.getKontakt();
 
             String IP = e.getAddress().getHostAddress().replaceAll("\\.", "-");
-            String Wyjatek = String.valueOf(Cache.getFromWyjatkiNew(IP));
+            String Wyjatek = String.valueOf(Cache.getFromWyjatkiIPNew(IP));
+            String WyjatekGracz = String.valueOf(Cache.getFromWyjatkiGraczeNew(e.getName()));
             String Country = String.valueOf(Cache.getFromCountryNew(IP));
             String Proxy = String.valueOf(Cache.getFromProxyNew(IP));
 
+            if (WyjatekGracz.equalsIgnoreCase("true")) {
+                return;
+            }
+            if (WyjatekGracz.equalsIgnoreCase("false")) {
+                e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu zablokowania Twojego nicku."));
+                return;
+            }
             if (Wyjatek.equalsIgnoreCase("false")) {
                 e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatFix.fixColor("&7Polaczenie z serwerem zostalo przerwane z powodu zablokowania Twojego IP w module."));
                 return;

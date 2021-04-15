@@ -24,8 +24,11 @@ public class AntyProxy {
                 if (!data.exists("plugins/BitCore/Modules/AntyProxy/lang.yml")) {
                     data.ymlSave("plugins/BitCore/Modules/AntyProxy/lang.yml", "Kontakt", "&a<NL>discord.com");
                 }
-                if (!data.exists("plugins/BitCore/Modules/AntyProxy/wyjatki.yml")) {
-                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/wyjatki.yml", "127-0-0-1", true);
+                if (!data.exists("plugins/BitCore/Modules/AntyProxy/whitelist/IP.yml")) {
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/IP.yml", "127-0-0-1", true);
+                }
+                if (!data.exists("plugins/BitCore/Modules/AntyProxy/whitelist/players.yml")) {
+                    data.ymlSaveBoolean("plugins/BitCore/Modules/AntyProxy/whitelist/players.yml", "Jakasnazwagracza123", false);
                 }
                 if (!data.exists("plugins/BitCore/Modules/AntyProxy/cache/country.yml")) {
                     data.createFile("plugins/BitCore/Modules/AntyProxy/cache/country.yml");
@@ -37,7 +40,6 @@ public class AntyProxy {
                 e.printStackTrace();
                 System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &cNie mozna odczytac lub zapisac plikow konfiguracyjnych! Sprawdz czy uprawnienia dostepu do plikow zostaly poprawnie ustawione."));
             }
-            System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie cache..."));
             long timerStart = System.currentTimeMillis();
             Settings.reloadConfig();
             byte n = 1;
@@ -60,7 +62,8 @@ public class AntyProxy {
             }
             p++;
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Ladowanie wyjatkow (" + p + "/" + n + ")"));
-            Cache.LoadWyjatkiNew();
+            Cache.LoadWyjatkiIPNew();
+            Cache.LoadWyjatkiGraczeNew();
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &7Zakonczono ladowanie cache (" + (System.currentTimeMillis() - timerStart) + " ms)"));
             System.out.println(ChatFix.fixColor("&9&l[AntyProxy] &aWlaczono modul AntyProxy"));
         }

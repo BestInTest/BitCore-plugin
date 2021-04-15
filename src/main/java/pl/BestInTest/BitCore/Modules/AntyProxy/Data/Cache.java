@@ -10,26 +10,27 @@ public class Cache {
     // Nowy system cache//|  // Nowy system cache//|  // Nowy system cache//|
     //------------------//|  //------------------//|  //------------------//|
 
-    static HashMap<String,String> WyjatkiNew = new HashMap<>();
+    static HashMap<String,String> WyjatkiIPNew = new HashMap<>();
+    static HashMap<String,String> WyjatkiGraczeNew = new HashMap<>();
     static HashMap<String,String> Proxy = new HashMap<>();
     static HashMap<String,String> Country = new HashMap<>();
 
-                                //---------//|
-                                // Wyjatki //|
-                                //---------//|
+                                //------------//|
+                                // Wyjatki IP //|
+                                //------------//|
 
-    public static void LoadWyjatkiNew() throws FileNotFoundException {
-        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/wyjatki.yml")).useDelimiter(System.lineSeparator());
-        if (!WyjatkiNew.isEmpty()) {
-            WyjatkiNew.clear();
+    public static void LoadWyjatkiIPNew() throws FileNotFoundException {
+        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/whitelist/IP.yml")).useDelimiter(System.lineSeparator());
+        if (!WyjatkiIPNew.isEmpty()) {
+            WyjatkiIPNew.clear();
         }
         while (s.hasNextLine()) {
             String line = s.nextLine();
             if (line.contains("true")) {
-                WyjatkiNew.put(line.replaceAll(": true",""),"true");
+                WyjatkiIPNew.put(line.replaceAll(": true",""),"true");
             }
             if (line.contains("false")) {
-                WyjatkiNew.put(line.replaceAll(": false", ""),"false");
+                WyjatkiIPNew.put(line.replaceAll(": false", ""),"false");
             }
         }
     }
@@ -37,22 +38,66 @@ public class Cache {
                              //------------------//|
                              //Zapytania do cache//|
                              //------------------//|
-    public static String getFromWyjatkiNew(String s) {
-        return WyjatkiNew.get(s);
+    public static String getFromWyjatkiIPNew(String s) {
+        return WyjatkiIPNew.get(s);
     }
 
                              //------------------//|
                              // Usuwanie z cache //|
                              //------------------//|
-    public static void removeFromWyjatkiNew(String s) {
-        WyjatkiNew.remove(s);
+    public static void removeFromWyjatkiIPNew(String s) {
+        WyjatkiIPNew.remove(s);
     }
 
                              //------------------//|
                              //Dodawanie do cache//|
                              //------------------//|
-    public static void addToWyjatkiNew(String s, String value) {
-        WyjatkiNew.put(s,value);
+    public static void addToWyjatkiIPNew(String s, String value) {
+        WyjatkiIPNew.put(s,value);
+    }
+
+
+
+
+                            //----------------//|
+                            // Wyjatki Gracze //|
+                            //----------------//|
+
+    public static void LoadWyjatkiGraczeNew() throws FileNotFoundException {
+        Scanner s = new Scanner(new File("plugins/BitCore/Modules/AntyProxy/whitelist/players.yml")).useDelimiter(System.lineSeparator());
+        if (!WyjatkiGraczeNew.isEmpty()) {
+            WyjatkiGraczeNew.clear();
+        }
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            if (line.contains("true")) {
+                WyjatkiGraczeNew.put(line.replaceAll(": true",""),"true");
+            }
+            if (line.contains("false")) {
+                WyjatkiGraczeNew.put(line.replaceAll(": false", ""),"false");
+            }
+        }
+    }
+
+                            //------------------//|
+                            //Zapytania do cache//|
+                            //------------------//|
+    public static String getFromWyjatkiGraczeNew(String s) {
+        return WyjatkiGraczeNew.get(s);
+    }
+
+                            //------------------//|
+                            // Usuwanie z cache //|
+                            //------------------//|
+    public static void removeFromWyjatkiGraczeNew(String s) {
+        WyjatkiGraczeNew.remove(s);
+    }
+
+                            //------------------//|
+                            //Dodawanie do cache//|
+                            //------------------//|
+    public static void addToWyjatkiGraczeNew(String s, String value) {
+        WyjatkiGraczeNew.put(s,value);
     }
 
 
