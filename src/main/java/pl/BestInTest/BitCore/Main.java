@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.BestInTest.BitCore.Commands.BitCoreCommand;
 import pl.BestInTest.BitCore.Listeners.GuiListener;
 import pl.BestInTest.BitCore.Managers.Update;
+import pl.BestInTest.BitCore.Modules.AntyProxy.Commands.SprawdzIP;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Commands.antyproxy;
 import pl.BestInTest.BitCore.Modules.AntyProxy.Listeners.Connect;
 import pl.BestInTest.BitCore.Modules.AntyProxy.AntyProxy;
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
         // AntyProxy
         getCommand("antyproxy").setExecutor(new antyproxy());
+        getCommand("sprawdzip").setExecutor(new SprawdzIP());
         getServer().getPluginManager().registerEvents(new Connect(), this);
         try {
             AntyProxy.start();

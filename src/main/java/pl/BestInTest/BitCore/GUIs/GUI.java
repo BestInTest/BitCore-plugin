@@ -71,6 +71,7 @@ public class GUI {
                             , ChatFix.fixColor("")
                             , ChatFix.fixColor("&9Komendy:")
                             , ChatFix.fixColor("&9/antyproxy")
+                            , ChatFix.fixColor("&9/sprawdzIP")
                             , ""
                             , ChatFix.fixColor("&8[&aKliknij aby wlaczyc&8]")));
             Inventory.setItem(13, antyproxy.build());
@@ -85,6 +86,7 @@ public class GUI {
                                 , ChatFix.fixColor("")
                                 , ChatFix.fixColor("&9Komendy:")
                                 , ChatFix.fixColor("&9/antyproxy")
+                                , ChatFix.fixColor("&9/sprawdzIP")
                                 , ""
                                 , ChatFix.fixColor("&8[&bKliknij aby zarzadzac&8]"))).addEnchantment(Enchantment.DURABILITY,1);
                 Inventory.setItem(13, antyproxy.build());

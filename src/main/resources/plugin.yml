@@ -8,6 +8,7 @@ commands:
     description: Menu opcji pluginu.
     aliases: bit
   antyproxy:
+  sprawdzip:
   2step:
   2login:
     aliases: 2l

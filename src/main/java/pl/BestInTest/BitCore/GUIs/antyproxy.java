@@ -57,10 +57,10 @@ public class antyproxy {
             Inventory.setItem(5, ipapiProvider.build());
         }
         if (Settings.getProxyCheck()) {
-            ItemBuilder sprProxy = (new ItemBuilder(Material.REDSTONE_TORCH_ON, 1)).setTitle(ChatFix.fixColor("&9Sprawdzanie statusu proxy")).addLores(Arrays.asList(ChatFix.fixColor("&8Blokuje polaczenia, ktore pochodza od"), ChatFix.fixColor("&8proxy, VPN i TORa (nawet jezeli IP jest polskie)."))).addEnchantment(Enchantment.DURABILITY,1);
+            ItemBuilder sprProxy = (new ItemBuilder(Material.REDSTONE_TORCH_ON, 1)).setTitle(ChatFix.fixColor("&9Sprawdzanie statusu proxy")).addLores(Arrays.asList(ChatFix.fixColor("&8Blokuje polaczenia, ktore pochodza od"), ChatFix.fixColor("&8proxy, VPN i TORa (nawet jezeli IP jest polskie)."), " ", ChatFix.fixColor("&8[&aWlaczone&8]"))).addEnchantment(Enchantment.DURABILITY,1);
             Inventory.setItem(6, sprProxy.build());
         } else {
-            ItemBuilder sprProxy = (new ItemBuilder(Material.REDSTONE_TORCH_ON, 1)).setTitle(ChatFix.fixColor("&9Sprawdzanie statusu proxy")).addLores(Arrays.asList(ChatFix.fixColor("&8Blokuje polaczenia, ktore pochodza od"), ChatFix.fixColor("&8proxy, VPN i TORa (nawet jezeli IP jest polskie).")));
+            ItemBuilder sprProxy = (new ItemBuilder(Material.REDSTONE_TORCH_ON, 1)).setTitle(ChatFix.fixColor("&9Sprawdzanie statusu proxy")).addLores(Arrays.asList(ChatFix.fixColor("&8Blokuje polaczenia, ktore pochodza od"), ChatFix.fixColor("&8proxy, VPN i TORa (nawet jezeli IP jest polskie)."), " ", ChatFix.fixColor("&8[&cWylaczone&8]")));
             Inventory.setItem(6, sprProxy.build());
         }
         ItemBuilder wylaczenie = (new ItemBuilder(Material.LEVER, 1)).setTitle(ChatFix.fixColor("&7Wylacz modul"));
