@@ -89,7 +89,7 @@ public class antyproxy implements CommandExecutor {
                         return true;
                     }
                     if (args[0].equalsIgnoreCase("sprawdz")) {
-                        String playerInfo = String.valueOf(Cache.getFromWyjatkiGraczeNew(args[1]));
+                        String playerInfo = Cache.getFromWyjatkiGraczeNew(args[1]);
                         if (playerInfo.equalsIgnoreCase("true")) {
                             sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla gracza " + args[1] + ": &azezwolono"));
                             return true;
@@ -99,7 +99,7 @@ public class antyproxy implements CommandExecutor {
                             return true;
                         }
                         if (isValidIP) {
-                            String ipInfo = String.valueOf(Cache.getFromWyjatkiIPNew(IP));
+                            String ipInfo = Cache.getFromWyjatkiIPNew(IP);
                             if (ipInfo.equalsIgnoreCase("true")) {
                                 sender.sendMessage(ChatFix.fixColor("&9&l[AntyProxy] &cStatus dla adresu " + clearIP + ": &azezwolono"));
                                 return true;
