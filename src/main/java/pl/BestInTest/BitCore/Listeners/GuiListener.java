@@ -56,6 +56,7 @@ public class GuiListener implements Listener {
                         antyproxy.AntyProxyGUI(player);
                         return;
                     }
+                    /*
                     if (ChatFix.fixColor("&bPinger &8(&c&lX&8)").equalsIgnoreCase(event.getCurrentItem().getItemMeta().getDisplayName())) {
 
                         player.closeInventory();
@@ -69,6 +70,7 @@ public class GuiListener implements Listener {
                         //to do
                         GUI.bitcore(player);
                     }
+                    */
                 }
             }
             if (ChatFix.fixColor("&a&lBC &7&l&m&o|&e&l zarzadzanie &7&l&m&o|&9 AntyProxy").equalsIgnoreCase(event.getView().getTitle())) {

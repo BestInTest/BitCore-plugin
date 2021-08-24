@@ -91,7 +91,7 @@ public class GUI {
                                 , ChatFix.fixColor("&8[&bKliknij aby zarzadzac&8]"))).addEnchantment(Enchantment.DURABILITY,1);
                 Inventory.setItem(13, antyproxy.build());
         }
-
+        /*
         if (!Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/Settings.yml", "Moduly.Pinger"))) {
             ItemBuilder pinger = (new ItemBuilder(Material.COMPASS, 1)).setTitle(ChatFix.fixColor("&bPinger &8(&c&lX&8)"))
                     .addLores(Arrays.asList(""
@@ -120,6 +120,9 @@ public class GUI {
                                 , ChatFix.fixColor("&8[&aZainstalowano&8]")));
                 Inventory.setItem(14, pinger.build());
             }
+        */
+        ItemBuilder soon = new ItemBuilder(Material.COMPASS,  1).setTitle(ChatFix.fixColor("&7&lSoon..."));
+        Inventory.setItem(14, soon.build());
 
 
 
