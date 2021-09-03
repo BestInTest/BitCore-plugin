@@ -22,7 +22,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        Update update = new Update();
         // BitCore
         saveDefaultConfig();
         Settings.create();
@@ -48,7 +47,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CommandListener(), this);
         Step.start();
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, update::check, 20,3600 * 20L);
+        new Update().runTaskTimerAsynchronously(this, 20, 3600 * 20L);
 
     }
     public static Main getInstance() {

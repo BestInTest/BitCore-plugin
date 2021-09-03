@@ -27,8 +27,7 @@ public class GUI {
                         , ""
                         , ChatFix.fixColor("&aWersja zainstalowana&7: " + bitcorewersja)
                         , ChatFix.fixColor("&bDane z serwera online&7: " + VersionManager.getBitCoreVer())
-                        , ""
-                        , ChatFix.fixColor("&8[&aKliknij aby zobaczyc ustawienia&8]")));
+                        , ""));
         ItemBuilder zamknij = (new ItemBuilder(Material.BARRIER, 1)).setTitle(ChatFix.fixColor("&4Zamknij"));
 
         if (Boolean.parseBoolean(data.ymlLoad("plugins/BitCore/Modules/Settings.yml", "Moduly.2Step"))) {

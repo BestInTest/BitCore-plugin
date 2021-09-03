@@ -8,7 +8,11 @@ commands:
     description: Menu opcji pluginu.
     aliases: bit
   antyproxy:
+    description: Komendy do modulu AntyProxy
   sprawdzip:
+    description: Sprawdzanie IP
   2step:
+    description: Komendy do modulu 2Step
   2login:
+    description: Logowanie administracji modulem 2Step
     aliases: 2l
